@@ -1,0 +1,28 @@
+pipeline {
+    agent any
+
+    stages {
+
+        stage('Checkout') {
+            steps {
+                echo "Getting code from GitHub..."
+                checkout scm
+            }
+        }
+
+        stage('Run Unit Tests') {
+           call()
+        }
+
+    }
+
+    post {
+        success {
+            echo "Unit tests passed successfully!"
+        }
+
+        failure {
+            echo "Unit tests failed!"
+        }
+    }
+}
